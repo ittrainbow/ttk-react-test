@@ -1,17 +1,16 @@
 import { Layout } from '@/components'
 import { Catalog } from '@/pages'
-import { Provider } from 'react-redux'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './App.css'
-import store from './redux/store'
+import { ContextProvider } from './components/context'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Provider store={store}>
+    <ContextProvider>
       <Layout>
         <Catalog />
       </Layout>
-    </Provider>
+    </ContextProvider>
   </React.StrictMode>
 )

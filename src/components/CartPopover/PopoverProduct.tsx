@@ -1,8 +1,8 @@
-import { REMOVE_FROM_CART } from '@/redux/types'
 import { Product } from '@/types'
 import { TrashIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
-import { useDispatch } from 'react-redux'
+import { useContext } from 'react'
+import { Context } from '../context'
 
 type Props = {
   product: Product
@@ -11,11 +11,8 @@ type Props = {
 
 export function PopoverProduct({ product, className }: Props) {
   const { id } = product
-  const dispatch = useDispatch()
+  const { removeFromCart } = useContext(Context)
 
-  const handleRemoveFromCart = () => {
-    dispatch({ type: REMOVE_FROM_CART, payload: id })
-  }
   return (
     <article className={clsx('flex items-center flex-wrap gap-4', className)}>
       <div className="relative grid flex-shrink-0 w-12 h-12 bg-white rounded-lg">
@@ -36,7 +33,7 @@ export function PopoverProduct({ product, className }: Props) {
       </div>
       <button
         className="relative flex-shrink-0 p-1 border-2 rounded-lg ms-auto group border-neutral-700 hover:border-neutral-800 active:border-neutral-700 hover:bg-neutral-800 active:bg-neutral-700"
-        onClick={handleRemoveFromCart}
+        onClick={() => removeFromCart(id)}
       >
         <TrashIcon
           strokeWidth={2}

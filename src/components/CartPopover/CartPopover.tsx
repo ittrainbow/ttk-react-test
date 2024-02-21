@@ -1,19 +1,18 @@
 import { FaceFrownIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { PopoverProduct } from './PopoverProduct'
-import { useSelector } from 'react-redux'
-import { selectCart, selectProducts } from '@/redux/selectors'
+import { useContext } from 'react'
+import { Context } from '../context'
 
 type Props = { className?: string }
 
 export function CartPopover({ className }: Props) {
-  const cart = useSelector(selectCart)
-  const products = useSelector(selectProducts)
+  const { cart, products } = useContext(Context)
 
-  // надо ли делать пустой поповер и с продуктами равной ширины? min-w-80
+  // по-хорошему убрать бы это в два отдельных компонента
+  // но плодить миллион файлов - мы же не в свелте
+  // все равно оставлю так, условия в jsx нормально выглядят а тернарник посреди верстки уже громоздко
 
-  // layout
-  
   const cartIsEmpty = (
     <div className="grid justify-items-center ">
       <FaceFrownIcon className="h-9 w-9 text-neutral-600" />

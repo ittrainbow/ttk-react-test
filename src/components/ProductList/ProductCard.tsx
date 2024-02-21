@@ -1,5 +1,3 @@
-import { selectCart } from '@/redux/selectors'
-import { ADD_TO_CART, REMOVE_FROM_CART } from '@/redux/types'
 import { Product } from '@/types'
 import {
   CheckIcon,
@@ -8,7 +6,8 @@ import {
 } from '@heroicons/react/24/outline'
 import { StarIcon } from '@heroicons/react/24/solid'
 import clsx from 'clsx'
-import { useSelector, useDispatch } from 'react-redux'
+import { useContext } from 'react'
+import { Context } from '../context'
 
 type Props = {
   product: Product
@@ -16,17 +15,8 @@ type Props = {
 }
 
 export function ProductCard({ product, className }: Props) {
-  const cart = useSelector(selectCart)
-  const dispatch = useDispatch()
+  const { cart, addToCart, removeFromCart } = useContext(Context)
   const { id } = product
-
-  const handleAddToCart = () => {
-    dispatch({ type: ADD_TO_CART, payload: id })
-  }
-
-  const handleRemoveFromCart = () => {
-    dispatch({ type: REMOVE_FROM_CART, payload: id })
-  }
 
   // layout
 
@@ -38,7 +28,7 @@ export function ProductCard({ product, className }: Props) {
       </div>
       <button
         className="flex group items-center justify-center gap-2 rounded-lg p-1.5 border-2 border-neutral-900 hover:border-neutral-800 hover:bg-neutral-800 active:border-neutral-700 active:bg-neutral-700"
-        onClick={handleRemoveFromCart}
+        onClick={() => removeFromCart(id)}
       >
         <TrashIcon
           strokeWidth={2}
@@ -51,7 +41,7 @@ export function ProductCard({ product, className }: Props) {
   const productNotInCart = (
     <button
       className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-neutral-900 hover:bg-neutral-800 active:bg-neutral-700"
-      onClick={handleAddToCart}
+      onClick={() => addToCart(id)}
     >
       <ShoppingBagIcon strokeWidth={2} className="w-6 h-6 text-neutral-200" />
       <span className="font-medium text-neutral-200">Add to cart</span>

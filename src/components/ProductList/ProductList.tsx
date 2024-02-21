@@ -1,14 +1,13 @@
-// import { products } from '@/data'
 import clsx from 'clsx'
 import { ProductCard } from './ProductCard'
-import { useSelector } from 'react-redux'
-import { selectProducts } from '@/redux/selectors'
 import { Loader } from '@/pages/Loader/Loader'
+import { useContext } from 'react'
+import { Context } from '../context'
 
 type Props = { className?: string }
 
 export function ProductList({ className }: Props) {
-  const products = useSelector(selectProducts)
+  const { products } = useContext(Context)
 
   if (!products.length) return <Loader />
 
