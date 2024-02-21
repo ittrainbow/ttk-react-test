@@ -9,7 +9,12 @@ function* fetchProductsSaga() {
       fetchData,
       'https://fakestoreapi.com/products/'
     )
-    yield put({ type: INIT_SUCCESS, payload: products })
+    const storedCart: string | null = localStorage.getItem('fakeStoreCart')
+    const cart: number[] = storedCart
+      ? JSON.parse(storedCart).map((el: string) => Number(el))
+      : []
+
+    yield put({ type: INIT_SUCCESS, payload: { products, cart } })
   } catch (error) {
     if (error instanceof Error) {
       yield put({ type: ERROR, payload: error.message })

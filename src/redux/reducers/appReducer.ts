@@ -12,10 +12,11 @@ export const appReducer = (state = initialState, action: any) => {
 
   switch (type) {
     case INIT_SUCCESS:
+      const { products, cart } = payload
       return {
         ...state,
-        products: payload,
-        error: null,
+        products,
+        cart,
       }
 
     case ADD_TO_CART: {
