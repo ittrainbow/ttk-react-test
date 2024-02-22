@@ -37,9 +37,11 @@ export function Header({ className }: Props) {
         />
 
         {/* Индикатор количества товаров в корзине */}
-        <span className="absolute top-0 end-0 translate-x-1/2 -translate-y-1/2 text-xs font-medium min-w-5 py-0.5 px-1 rounded-full bg-emerald-500 text-white">
-          {cart.length}
-        </span>
+        {cart.length > 0 && (
+          <span className="absolute top-0 end-0 translate-x-1/2 -translate-y-1/2 text-xs font-medium min-w-5 py-0.5 px-1 rounded-full bg-emerald-500 text-white">
+            {cart.length}
+          </span>
+        )}
       </button>
 
       {/* Поповер с товарами корзины */}
