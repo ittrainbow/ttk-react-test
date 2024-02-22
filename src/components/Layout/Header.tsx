@@ -4,7 +4,7 @@ import {
 } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { CartPopover } from '..'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { Context } from '../context'
 
 type Props = { className?: string }

@@ -1,13 +1,6 @@
 import { createContext, useEffect, useState } from 'react'
 
-import { Product } from '@/types'
-
-type ContextType = {
-  products: Product[]
-  cart: number[]
-  addToCart: (id: number) => void
-  removeFromCart: (id: number) => void
-}
+import { Product, ContextType } from '@/types'
 
 export const Context = createContext({} as ContextType)
 
