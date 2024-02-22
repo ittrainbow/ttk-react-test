@@ -1,8 +1,7 @@
 import { Product } from '@/types'
 import { TrashIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
-import { useContext } from 'react'
-import { Context } from '../context'
+import { CartStore, useCart } from '../query'
 
 type Props = {
   product: Product
@@ -11,7 +10,7 @@ type Props = {
 
 export function PopoverProduct({ product, className }: Props) {
   const { id } = product
-  const { removeFromCart } = useContext(Context)
+  const { removeFromCart } = useCart((store: CartStore) => store)
 
   return (
     <article className={clsx('flex items-center flex-wrap gap-4', className)}>

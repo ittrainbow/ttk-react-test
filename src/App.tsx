@@ -2,15 +2,19 @@ import { Layout } from '@/components'
 import { Catalog } from '@/pages'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { QueryClientProvider, QueryClient } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
 import './App.css'
-import { ContextProvider } from './components/context'
+
+const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ContextProvider>
+    <QueryClientProvider client={queryClient}>
       <Layout>
         <Catalog />
       </Layout>
-    </ContextProvider>
+      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+    </QueryClientProvider>
   </React.StrictMode>
 )

@@ -1,16 +1,16 @@
 import { FaceFrownIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { PopoverProduct } from './PopoverProduct'
-import { useContext } from 'react'
-import { Context } from '../context'
+import { CartStore, useCart, useQueryState } from '../query'
 
 type Props = { className?: string }
 
 export function CartPopover({ className }: Props) {
-  const { cart, products } = useContext(Context)
+  const { data } = useQueryState()
+  const { cart } = useCart((store: CartStore) => store)
 
   // по-хорошему убрать бы это в два отдельных компонента
-  // но плодить миллион файлов - мы же не в свелте
+  // но плодить миллион файлов - тоже не очень здорово
   // все равно оставлю так, условия в jsx нормально выглядят а тернарник посреди верстки уже громоздко
 
   const cartIsEmpty = (
@@ -23,8 +23,8 @@ export function CartPopover({ className }: Props) {
   const cartGotProducts = (
     <ul className="grid gap-3">
       <li className="grid pb-3 border-b border-neutral-200 last:pb-0 last:border-b-0">
-        {products
-          .filter((product) => cart.includes(product.id))
+        {data
+          ?.filter((product) => cart.includes(product.id))
           .map((product) => (
             <PopoverProduct
               key={product.id}

@@ -1,15 +1,14 @@
 import clsx from 'clsx'
 import { ProductCard } from './ProductCard'
 import { Loader } from '@/pages/Loader/Loader'
-import { useContext } from 'react'
-import { Context } from '../context'
+import { useQueryState } from '../query'
 
 type Props = { className?: string }
 
 export function ProductList({ className }: Props) {
-  const { products } = useContext(Context)
+  const { isLoading, data } = useQueryState()
 
-  if (!products.length) return <Loader />
+  if (isLoading) return <Loader />
 
   return (
     <ul
@@ -18,7 +17,7 @@ export function ProductList({ className }: Props) {
         className
       )}
     >
-      {products?.map((product) => {
+      {data?.map((product) => {
         return (
           <li key={product.id} className="grid">
             <ProductCard product={product} />

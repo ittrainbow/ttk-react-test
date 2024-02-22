@@ -6,8 +6,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { StarIcon } from '@heroicons/react/24/solid'
 import clsx from 'clsx'
-import { useContext } from 'react'
-import { Context } from '../context'
+import { CartStore, useCart } from '../query'
 
 type Props = {
   product: Product
@@ -15,8 +14,10 @@ type Props = {
 }
 
 export function ProductCard({ product, className }: Props) {
-  const { cart, addToCart, removeFromCart } = useContext(Context)
   const { id } = product
+  const { cart, addToCart, removeFromCart } = useCart(
+    (store: CartStore) => store
+  )
 
   // layout
 
