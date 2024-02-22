@@ -1,10 +1,5 @@
+import { CartStore } from '@/types/CartStore'
 import { create } from 'zustand'
-
-export type CartStore = {
-  cart: number[]
-  addToCart: (id: number) => void
-  removeFromCart: (id: number) => void
-}
 
 const localCart = localStorage.getItem('fakeStoreCart')
 
